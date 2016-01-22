@@ -17,8 +17,10 @@ import os
 import time
 from datetime import datetime, timedelta
 from config import config
-from linkmanager import savelink
 from pprint import pprint # for debugging purposes
+
+# import link manager function
+from linkmanager import savelink
 
 # constants
 
