@@ -1,11 +1,11 @@
 # simple link manager sample
 # this module should implement the following method:
-#  savelink(channel, user, data)
+#  savelinkdata(channel, user, data)
 
 import os
 from config import config # generic configuration settings
 
-def savelink(channel, user, data):
+def savelinkdata(channel, user, data):
 	# retrieving absolute output directory
 	outputdir = config['maindir']+config['outputdir']
 	# creating main output directory, if needed
@@ -13,12 +13,12 @@ def savelink(channel, user, data):
 	except: os.mkdir(outputdir)
 	# retrieving needed missing data
 	date = float(data['ts'])
-	url = data['text'][1:-1]
+	text = data['text'] # saving full text
 	# retrieving output file name
 	filename = outputdir+"/"+channel+'.txt'
 	try:
 		# computing link data string
-		s = "["+str(date)+"] "+user+": "+url
+		s = "["+str(date)+"] "+user+": "+text
 		print s
 		# appening link data to output
 		out_file = open(filename, "a")

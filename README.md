@@ -49,7 +49,7 @@ This project is a fork of [auino/slack-downloader](https://github.com/auino/slac
 ### Extensions ###
 
 You can extend the program by implementing your own link manager.
-In order to do that, you have to implement a `savelink(channel, user, data)` function.
+In order to do that, you have to implement a `savelinkdata(channel, user, data)` function.
 Then you have to include the function on the main `slack-sharedlinks-manager.py` file.
 For more information, check the `linkmanager.py` file.
 

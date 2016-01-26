@@ -20,7 +20,7 @@ from config import config
 from pprint import pprint # for debugging purposes
 
 # import link manager function
-from linkmanager import savelink
+from linkmanager import savelinkdata
 
 # constants
 
@@ -124,9 +124,9 @@ if __name__ == '__main__':
 				if config['debug'] and config['extreme_debug']: pprint(m)
 				date = float(m['ts'])
 				if ts == None or float(date) > float(ts): ts = date
-				if str(m['text'][:5].decode('utf-8')) == "<http":
+				if "<http" in str(m['text'].decode('utf-8')):
 					user = get_user_name(m['user'])
-					savelink(channel['name'], user, m)
+					savelinkdata(channel['name'], user, m)
 			except Exception, e:
 				if config['debug']: pprint(e)
 				continue
