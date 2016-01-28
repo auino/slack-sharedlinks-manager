@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
 # 
-# slack-sharedlinks-manager
+# slack-sharedmessages-manager
 # Author: Enrico Cambiaso
 # Email: enrico.cambiaso[at]gmail.com
-# GitHub project URL: https://github.com/auino/slack-sharedlinks-manager
+# GitHub project URL: https://github.com/auino/slack-sharedmessages-manager
 # 
 
 import requests
@@ -19,8 +19,8 @@ from datetime import datetime, timedelta
 from config import config
 from pprint import pprint # for debugging purposes
 
-# import link manager function
-from linkmanager import savelinkdata
+# import messages manager function
+from linkmanager import managemessage
 
 # constants
 
@@ -110,7 +110,7 @@ if __name__ == '__main__':
 	channels_id = []
 	for channel_data in channels_data:
 		if str(channel_data['name']) in config['considered_channels']: channels_id.append({'name':str(channel_data['name']), 'id':str(channel_data['id'])})
-	# retrieving links for each channel
+	# retrieving messages for each channel
 	for channel in channels_id:
 		print "\nCHANNEL", channel['name'].upper()
 		users = dict()
@@ -124,9 +124,8 @@ if __name__ == '__main__':
 				if config['debug'] and config['extreme_debug']: pprint(m)
 				date = float(m['ts'])
 				if ts == None or float(date) > float(ts): ts = date
-				if "<http" in str(m['text'].decode('utf-8')):
-					user = get_user_name(m['user'])
-					savelinkdata(channel['name'], user, m)
+				user = get_user_name(m['user'])
+				managemessage(channel['name'], user, m)
 			except Exception, e:
 				if config['debug']: pprint(e)
 				continue

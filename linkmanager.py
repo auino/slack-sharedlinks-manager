@@ -1,11 +1,13 @@
 # simple link manager sample
 # this module should implement the following method:
-#  savelinkdata(channel, user, data)
+#  managemessage(channel, user, data)
 
 import os
 from config import config # generic configuration settings
 
-def savelinkdata(channel, user, data):
+def managemessage(channel, user, data):
+	# retrieving only messages containing shared links
+	if not "<http" in str(data['text'].decode('utf-8')): return False
 	# retrieving absolute output directory
 	outputdir = config['maindir']+config['outputdir']
 	# creating main output directory, if needed
